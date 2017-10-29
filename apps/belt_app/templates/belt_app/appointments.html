@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Welcome</title>
+    </head>
+    <body>
+
+        <div>
+            {% csrf_token %}
+            <nav>
+                <h1> Welcome, {{user.Name}}!</h1>
+                <a href="/logout" >Logout</a>
+            </nav>
+            <div class="apts">
+                <h2>Here are your appointments for today {{appointmnet.date}}</h2>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Tasks</th>
+                            <th>time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <form action="/add" method='post'>
+                            <tr {% for appointment in appointments %}>
+                                <td>{{appointment.task}}</td>
+                                <td>{{appointment.time}}</td>
+                                <td>{{appointment.status}}</td>
+                                {% if appointment.status != "Done" %}
+                                    <td><a href="/edit/{{appointment.id}}">Edit</a>&nbsp;&nbsp;<a href="/delete/{{appointment.id}}">Delete</a></td>
+                                {% endif %}
+                            </tr {% endfor %}>
+                        </form>    
+                    </table>
+
+                </div>    
+            </div>
+
+            <div class="other">
+                <h2>Your Other appointments:</h2>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Tasks</th>
+                            <th>Date</th>
+                            <th>time</th>
+                        </tr>
+                        <tr {% for appointment in other_appointments %}>
+                                <td>{{appointment.task}}</td>
+                                <td>{{appointment.date}}</td>
+                                <td>{{appointment.time}}</td>
+                                
+                        </tr {% endfor %}>
+                        
+                    </table>   
+                </div>
+            </div>
+                
+            <div class="contribute">
+                <h2>Add Appointment</h2>
+                <form action="/add" method='post'>
+                    {% csrf_token %}
+                    Date :<input type="date" name="date"><br>
+                    time: <input type="time" name="time"><br>
+                    Tasks:<input type = "text" name="task"><br>
+                    <input type='submit' value='Add'/>
+                </form>
+            </div>
+            
+            <div>
+                {% if messages %}
+                    {% for message in messages %}
+                    <h4>{{message}}</h4>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

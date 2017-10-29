@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>user</title>
+</head>
+<body>
+    <form action="/update/{{request.session.id}}/{{appointment.id}}" method='post'>
+    <div>
+            {% csrf_token %}
+        <a href="/logout" >Logout</a>
+        <a href="/appointments" >Dashboard</a>
+    </div>
+    <div>
+        <div>
+            <span style="color:blue;font-weight:bold">Tasks :</span>
+            <input type = "text" name="task" id="Task" value="{{appointment.task}}" >
+        </div><br>
+
+        <div>
+            <span style="color:blue;font-weight:bold">Status :</span>
+            <select name="status">
+                <option value="Done">Done</option>
+                <option value="Pending">Pending</option>
+                <option value="Missed">Missed</option>
+            </select>    
+        </div><br>
+
+        <div>
+            <span style="color:blue;font-weight:bold">Date :</span>
+            <input type = "date" name="date" id="date" value="{{appointment.date}}" >
+        </div><br>
+
+        <div>
+            <span style="color:blue;font-weight:bold">Time :</span>
+            <input type="text" name="time" value="{{appointment.time}}" > 
+        </div><br>
+
+        <div>
+                <input type='submit' value='Update'/>
+        </div>
+    </div>
+    </form>
+    
+    
+</body>
+</html>

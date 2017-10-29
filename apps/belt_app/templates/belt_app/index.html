@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    
+        <title>Longin and Registration | Home</title>
+    </head>
+    <body>
+        <div class="registration">
+            <h1>Registration</h1>
+            <form action='/register' method='POST'>
+                {% csrf_token %}
+                <div>
+                    <span style="color:blue;font-weight:bold">Name :</span>
+                    <input type = "text" name="Name" id="Name" placeholder=" name">
+                </div><br>
+                <div>
+                <span style="color:blue;font-weight:bold">Alias :</span>
+                <input type = "text" name="Alias" id="Alias" placeholder="Alias">
+                </div><br>
+                
+                <div>
+                    <span style="color:blue;font-weight:bold">Email Address :</span>
+                    <input type = "text" name="email" id="email" placeholder="enter your email id">
+                </div><br>
+                <div>
+                    <span style="color:blue;font-weight:bold">Password :</span>
+                    <input type = "password" name="password" id="password" placeholder="enter your password">
+
+                </div><br>
+
+                <div>
+                    <span style="color:#B45746;font-weight:bold">*Password should be at least 8 characters</span>
+                </div>
+                <div>
+                    <span style="color:blue;font-weight:bold">Confirm Password :</span>
+                    <input type = "password" name="confirm_password" id="confirm_password" placeholder="confirm your password">
+
+                </div><br>
+                    
+                <div>
+                    Date of Birth:<input type="date" name="birthday" id="birthday">
+                 </div><br>
+
+                <div>  
+                    <input type="submit"  value="Submit">
+                </div>     
+                
+            </form>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <div class="login">
+            <h1>Login</h1>
+            <form action='/login' method='POST'>
+                {% csrf_token %}
+                <div>
+                    <span style="color:blue;font-weight:bold">Email  :</span>
+                    <input type = "text" name="email" id="email" placeholder="enter your email id">
+
+                </div><br>
+                <div>
+                    <span style="color:blue;font-weight:bold">Password :</span>
+                    <input type = "password" name="password" id="password" placeholder="enter your password">
+    
+                </div><br>
+                <div>
+                        <input type="submit"  value="LOG IN">
+                </div>
+        </div>
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                <h4>{{message}}</h4>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>        
